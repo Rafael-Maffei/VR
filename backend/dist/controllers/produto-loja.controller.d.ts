@@ -4,14 +4,17 @@ import { ProdutoLojaService } from 'src/services/produto-loja.service';
 export declare class ProdutoLojaController {
     private readonly produtoLojaService;
     constructor(produtoLojaService: ProdutoLojaService);
-    getListaProdutoLojas(): Promise<ProdutoLojaModel[]>;
+    getListaProdutoLojas(produtoId: number): Promise<ProdutoLojaModel[]>;
     criarProdutoLoja(produtoLojaDados: {
         idProduto: number;
         idLoja: number;
-        preco: Decimal;
+        preco: number;
     }): Promise<ProdutoLojaModel>;
     atualizarPreco(produtoLojaDadosAlterar: {
+        id: number;
         preco: Decimal;
-    }, produtoId: number, lojaId: number): Promise<ProdutoLojaModel>;
-    removerLoja(produtoId: number, lojaId: number): Promise<ProdutoLojaModel>;
+    }, produtoId: number): Promise<ProdutoLojaModel>;
+    removerLoja(produtoLojaDadosDeletar: {
+        id: number;
+    }, lojaId: number): Promise<ProdutoLojaModel>;
 }

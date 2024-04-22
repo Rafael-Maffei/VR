@@ -4,6 +4,7 @@ import { ProductRegisterComponent } from './views/product-register/product-regis
 import { ProductsComponent } from './views/products/products.component';
 import { UpdateProductComponent } from './components/update-product/update-product.component';
 import { DeleteProductComponent } from './components/delete-product/delete-product.component';
+import { ProductUpdateComponent } from './views/product-update/product-update.component';
 
 export const routes: Routes = [
   {
@@ -19,7 +20,7 @@ export const routes: Routes = [
           },
           {
             path: "cadastro/:id",
-            component: UpdateProductComponent
+            component: ProductUpdateComponent
           },
           {
             path: "delete/:id",

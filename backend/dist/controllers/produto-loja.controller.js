@@ -19,13 +19,13 @@ let ProdutoLojaController = class ProdutoLojaController {
     constructor(produtoLojaService) {
         this.produtoLojaService = produtoLojaService;
     }
-    async getListaProdutoLojas() {
+    async getListaProdutoLojas(produtoId) {
         return this.produtoLojaService.buscarTodosProdutoLoja({
-            orderBy: { idLoja: 'asc' },
+            where: { idProduto: Number(produtoId) },
+            orderBy: { idProduto: 'asc' },
         });
     }
     async criarProdutoLoja(produtoLojaDados) {
-        console.log(produtoLojaDados);
         const { idProduto, idLoja, preco } = produtoLojaDados;
         return this.produtoLojaService.criarProdutoLoja({
             produto: {
@@ -41,32 +41,30 @@ let ProdutoLojaController = class ProdutoLojaController {
             precoVenda: preco,
         });
     }
-    async atualizarPreco(produtoLojaDadosAlterar, produtoId, lojaId) {
-        const { preco } = produtoLojaDadosAlterar;
+    async atualizarPreco(produtoLojaDadosAlterar, produtoId) {
+        const { id, preco } = produtoLojaDadosAlterar;
         return this.produtoLojaService.atualizarProdutoLoja({
             where: {
-                idProduto_idLoja: {
-                    idProduto: produtoId,
-                    idLoja: lojaId,
-                },
+                id: id,
+                idProduto: Number(produtoId)
             },
             data: { precoVenda: preco },
         });
     }
-    async removerLoja(produtoId, lojaId) {
+    async removerLoja(produtoLojaDadosDeletar, lojaId) {
+        const { id } = produtoLojaDadosDeletar;
         return this.produtoLojaService.deletarProdutoLoja({
-            idProduto_idLoja: {
-                idProduto: produtoId,
-                idLoja: lojaId,
-            },
+            id: id,
+            idLoja: Number(lojaId)
         });
     }
 };
 exports.ProdutoLojaController = ProdutoLojaController;
 __decorate([
-    (0, common_1.Get)(''),
+    (0, common_1.Get)(':produtoId'),
+    __param(0, (0, common_1.Param)('produtoId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], ProdutoLojaController.prototype, "getListaProdutoLojas", null);
 __decorate([
@@ -77,20 +75,19 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ProdutoLojaController.prototype, "criarProdutoLoja", null);
 __decorate([
-    (0, common_1.Put)(':produtoId/:lojaId'),
+    (0, common_1.Put)(':produtoId'),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Param)('produtoId')),
-    __param(2, (0, common_1.Param)('lojaId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object, Number, Number]),
+    __metadata("design:paramtypes", [Object, Number]),
     __metadata("design:returntype", Promise)
 ], ProdutoLojaController.prototype, "atualizarPreco", null);
 __decorate([
-    (0, common_1.Delete)(':produtoId/:lojaId'),
-    __param(0, (0, common_1.Param)('produtoId')),
+    (0, common_1.Delete)(':lojaId'),
+    __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Param)('lojaId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Number]),
+    __metadata("design:paramtypes", [Object, Number]),
     __metadata("design:returntype", Promise)
 ], ProdutoLojaController.prototype, "removerLoja", null);
 exports.ProdutoLojaController = ProdutoLojaController = __decorate([

@@ -28,11 +28,10 @@ model Loja {
 }
 
 model ProdutoLoja {
+  id          Int       @id @default(autoincrement())
   produto     Produto   @relation(fields: [idProduto], references: [id])
-  idProduto   Int
+  idProduto   Int       
   loja        Loja      @relation(fields: [idLoja], references: [id])
   idLoja      Int
   precoVenda  Decimal?  @db.Decimal(13,3)
-
-  @@id([idProduto, idLoja])
 }

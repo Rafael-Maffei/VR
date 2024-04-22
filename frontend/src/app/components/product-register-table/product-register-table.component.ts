@@ -4,6 +4,7 @@ import { StoreService } from '../../services/store.service';
 import { Store } from '../../models/store-model';
 import { CommonModule } from '@angular/common';
 import { ProductStore } from '../../models/product-store-model';
+import { StoreDescriptionByIdPipe } from '../../pipes/store-descriptionById.pipe';
 
 @Component({
   selector: 'app-product-register-table',
@@ -12,6 +13,7 @@ import { ProductStore } from '../../models/product-store-model';
     CommonModule,
     RouterOutlet,
     RouterLink,
+    StoreDescriptionByIdPipe
   ],
   providers: [
     StoreService

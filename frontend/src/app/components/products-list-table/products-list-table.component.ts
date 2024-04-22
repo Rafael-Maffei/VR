@@ -30,6 +30,4 @@ export class ProductsListTableComponent {
   navigateToProductEdit(): void {    
     this.router.navigate(['produto/cadastro'])
   }
-
-  private productService = inject(ProductService)
 }

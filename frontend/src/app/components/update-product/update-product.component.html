@@ -4,7 +4,7 @@
 <button (click)="deleteProduct()" class="material-icons">
     delete
 </button>
-<div class="div">
+<div *ngIf="product" class="div">
     <span class="label">
         <label for="codigo">Código</label>
         <br>

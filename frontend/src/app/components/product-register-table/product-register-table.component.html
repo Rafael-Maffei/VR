@@ -9,26 +9,26 @@
             </th>
         </tr>
     </thead>
-    <tbody>
+    <tbody>        
         <tr *ngFor="let item of listProductStore">
             <td>
-                {{item.idLoja}}
-            </td>        
-            <td>        
+                {{item.idLoja | storeDescriptionById: listStores}}
+            </td>
+            <td>
                 {{ item.precoVenda }}
-            </td>        
+            </td>
             <td class="buttons">
-                <a routerLink = "/produto/cadastro/{{ item.idLoja }}">
+                <button routerLink = "/produto/cadastro/{{ item.idLoja }}">
                     <i class = "material-icons">
                         delete
                     </i>
-                </a>
+                </button>
                 <a routerLink = "/produto/cadastro/{{ item.idLoja }}">
                     <i class = "material-icons">
                         edit
                     </i>
                 </a>
-            </td>
-        </tr>
+            </td>            
+        </tr>    
     </tbody>
 </table>

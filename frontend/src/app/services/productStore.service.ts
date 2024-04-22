@@ -12,7 +12,8 @@ export class ProductStoreService {
 
   private http = inject(HttpClient)
   
-  public getProductStore(): Observable<ProductStore[]> {
-    return this.http.get<ProductStore[]>(this.productStoreUrl)
+  public getProductStore(storeId: number): Observable<ProductStore[]> {
+    const url = `${this.productStoreUrl}/${storeId}`
+    return this.http.get<ProductStore[]>(url)
   }
 }

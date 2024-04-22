@@ -7,23 +7,18 @@ import { ProdutoLojaService } from 'src/services/produto-loja.service';
 export class ProdutoLojaController {
   constructor(private readonly produtoLojaService: ProdutoLojaService) {}
 
-  // @Get(':produtoId')
-  // async getProdutoLojaById(@Param('produtoId') produtoId: number): Promise<ProdutoLojaModel> {
-  //   return this.produtoLojaService.buscarPorProdutoId({ idProduto: produtoId })
-  // }
-
-  @Get('')
-  async getListaProdutoLojas(): Promise<ProdutoLojaModel[]> {
+  @Get(':produtoId')
+  async getListaProdutoLojas(@Param('produtoId') produtoId: number): Promise<ProdutoLojaModel[]> {
     return this.produtoLojaService.buscarTodosProdutoLoja({
-      orderBy: { idLoja: 'asc' },
+      where: { idProduto: Number(produtoId) },
+      orderBy: { idProduto: 'asc' },
     });
   }
 
   @Post('')
   async criarProdutoLoja(
-    @Body() produtoLojaDados: { idProduto: number, idLoja: number, preco: Decimal },
+    @Body() produtoLojaDados: { idProduto: number, idLoja: number, preco: number },
   ): Promise<ProdutoLojaModel> {
-    console.log(produtoLojaDados);
     const { idProduto, idLoja, preco } = produtoLojaDados;
     return this.produtoLojaService.criarProdutoLoja({
         produto: {
@@ -40,32 +35,26 @@ export class ProdutoLojaController {
     });
   }
 
-  @Put(':produtoId/:lojaId')
+  @Put(':produtoId')
   async atualizarPreco(
-    @Body() produtoLojaDadosAlterar: { preco: Decimal },
-    @Param('produtoId') produtoId: number,
-    @Param('lojaId') lojaId: number): Promise<ProdutoLojaModel> {
-      const { preco } = produtoLojaDadosAlterar;
+    @Body() produtoLojaDadosAlterar: { id: number, preco: Decimal },
+    @Param('produtoId') produtoId: number): Promise<ProdutoLojaModel> {
+      const { id, preco } = produtoLojaDadosAlterar;
     return this.produtoLojaService.atualizarProdutoLoja({
-      where: {
-        idProduto_idLoja: {
-            idProduto: produtoId,
-            idLoja: lojaId,
-        },
-      },
+      where: { 
+        id: id,
+        idProduto: Number(produtoId) },
       data: { precoVenda: preco },
     });
   }
 
-  @Delete(':produtoId/:lojaId')
+  @Delete(':lojaId')
   async removerLoja(
-    @Param('produtoId') produtoId: number,
+    @Body() produtoLojaDadosDeletar: { id: number },
     @Param('lojaId') lojaId: number): Promise<ProdutoLojaModel> {
-    return this.produtoLojaService.deletarProdutoLoja({
-        idProduto_idLoja: {
-            idProduto: produtoId,
-            idLoja: lojaId,
-        },
-    });
+      const { id } = produtoLojaDadosDeletar;
+    return this.produtoLojaService.deletarProdutoLoja({ 
+      id: id,
+      idLoja: Number(lojaId) });
   }
 }
