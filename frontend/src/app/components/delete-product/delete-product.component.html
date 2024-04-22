@@ -1,0 +1,26 @@
+<button (click)="cancel()" class="material-icons">
+    cancel
+</button>
+<button (click)="deleteProduct()" class="material-icons">
+    delete
+</button>
+<div class="div">
+    <span class="label">
+        <label for="codigo">Código</label>
+        <br>
+        <input type="number" id="codigo" [value]="product.id" name="id" disabled="true"/>
+    </span>
+    <span class="label">
+        <label for="descricao">Descrição</label>        
+        <br>
+        <input type="text" id="descricao" [value]="product.descricao" name="descricao" required="true" disabled="true"/>
+    </span>
+    <span class="label">
+        <label for="custo">Custo</label>
+        <br>
+        <input type="number" id="custo" [value]="product.custo" name="custo" disabled="true"/>
+    </span>
+    <div class="img">
+        <input type="file" accept=".png, .jpg" [value]="product.imagem" name="imagem" disabled="true">
+    </div>
+</div>

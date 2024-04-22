@@ -1,0 +1,12 @@
+services:
+  pgsql:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: db_vr
+      POSTGRES_USER: rafael
+      POSTGRES_PASSWORD: rafael
+    ports:
+      - "5454:5432"
+    volumes:
+      - ./database:/var/lib/postgresql/data

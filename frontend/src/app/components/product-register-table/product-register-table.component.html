@@ -1,0 +1,34 @@
+<table>
+    <thead>
+        <tr>
+            <th>
+                Loja
+            </th>
+            <th>
+                Preço de Venda(R$)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of listProductStore">
+            <td>
+                {{item.idLoja}}
+            </td>        
+            <td>        
+                {{ item.precoVenda }}
+            </td>        
+            <td class="buttons">
+                <a routerLink = "/produto/cadastro/{{ item.idLoja }}">
+                    <i class = "material-icons">
+                        delete
+                    </i>
+                </a>
+                <a routerLink = "/produto/cadastro/{{ item.idLoja }}">
+                    <i class = "material-icons">
+                        edit
+                    </i>
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
